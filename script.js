@@ -25,14 +25,19 @@ function move_squares() {
     return;
   }
 
-  // The second class on the element is the one that positions it on the right,
-  // remove that class from all the squares.
-
+  // The second class on the element is the one that positions it on the right.
   var class_names = square.className.split(" ");
-  var all_squares = doc.getElementsByClassName(class_names[1]);
+  var bad_class = class_names[1];
 
-  while (all_squares.length > 0) {
-    all_squares[0].className = class_names[0];
+  // Find the CSS rule that defines that class
+  for (var i=0 ; i<doc.styleSheets.length ; ++i) {
+    for (var j=0 ; j<doc.styleSheets[i].rules.length ; ++j) {
+      if (doc.styleSheets[i].rules[j].selectorText == "." + bad_class) {
+        // Delete the rule
+        doc.styleSheets[i].deleteRule(j);
+        return;
+      }
+    }
   }
 }
 
