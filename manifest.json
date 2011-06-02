@@ -1,0 +1,11 @@
+{
+  "name": "Gmail movesquares",
+  "version": "1.0",
+  "description": "Moves the coloured squares in the label list back to the other side.",
+  "content_scripts": [
+    {
+      "matches": ["*://mail.google.com/mail/*"],
+      "js": ["script.js"]
+    }
+  ]
+}
